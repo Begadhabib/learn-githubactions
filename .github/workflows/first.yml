@@ -17,8 +17,6 @@ jobs:
       - name: Show Date and Time
         run: date
       - name: Install cowsay
-        run: sudo apt-get install -y cowsay
-      - name: Generate ascii art
-        run: cowsay -f dragon "This is my first GitHub Action!" >> ascii_art.txt
-      - name: Display ascii art
-        run: cat ascii_art.txt
+        run: | 
+          chmod +x ascii.sh
+          ./.github/workflows/ascii.sh
