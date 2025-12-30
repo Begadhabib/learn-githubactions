@@ -19,4 +19,4 @@ jobs:
       - name: Install cowsay
         run: | 
           chmod +x ascii.sh
-          ./.github/workflows/ascii.sh
+          ./ascii.sh
