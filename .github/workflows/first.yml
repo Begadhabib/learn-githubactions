@@ -4,7 +4,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    
+
       - uses: actions/checkout@v2
       - run: cat README.md
 
@@ -16,7 +16,7 @@ jobs:
         run: ls -la
       - name: Show Date and Time
         run: date
-      -name: Install cowsay
+      - name: Install cowsay
         run: sudo apt-get install -y cowsay
       - name: Generate ascii art
         run: cowsay -f dragon "This is my first GitHub Action!" >> ascii_art.txt
