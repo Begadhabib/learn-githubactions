@@ -14,3 +14,9 @@ jobs:
         run: pwd
       - name: List Files
         run: ls -la
+      - name: Show Date and Time
+        run: date
+      - name: Generate ascii art
+        run: cowsay -f dragon "This is my first GitHub Action!" >> ascii_art.txt
+      - name: Display ascii art
+        run: cat ascii_art.txt
