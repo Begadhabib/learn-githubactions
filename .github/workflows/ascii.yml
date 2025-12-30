@@ -42,7 +42,9 @@ jobs:
       - name: Display Ascii Art File
         run: |
           cat ascii_art.txt
-      -name: Deploy Step
+      - name: Deploy Step
         run: echo "Deploying Ascii Art Application..."
       - name: Final Message
         run: echo "Ascii Art Workflow Completed!"
+
+        
