@@ -39,20 +39,20 @@ jobs:
    
 
 
-deploy-job-3:
-  needs: test-job-2
-  runs-on: ubuntu-latest
-  steps:
-    - name: Sleep for 5 seconds
-      run: sleep 5
-    - name: Download ascii art file
-      uses: actions/download-artifact@v5
-      with:
-        name: ascii-art
-        path: ascii-art-folder
-    - name: Display Ascii Art File
-      run: cat ascii-art-folder/ascii_art.txt
-    - name: Deploy Step
-      run: echo "Deploying Ascii Art Application..."
-    - name: Final Message
-      run: echo "Ascii Art Workflow Completed!"
+  deploy-job-3:
+    needs: test-job-2
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sleep for 5 seconds
+        run: sleep 5
+      - name: Download ascii art file
+        uses: actions/download-artifact@v5
+        with:
+          name: ascii-art
+          path: ascii-art-folder
+      - name: Display Ascii Art File
+        run: cat ascii-art-folder/ascii_art.txt
+      - name: Deploy Step
+        run: echo "Deploying Ascii Art Application..."
+      - name: Final Message
+        run: echo "Ascii Art Workflow Completed!"
