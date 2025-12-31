@@ -14,6 +14,11 @@ jobs:
       - name: Display Ascii Art
         run: |
           cowsay -f dragon "Welcome to the Ascii Art Workflow!" >> ascii_art.txt
+      - name: upload ascii art File
+        uses: actions/upload-artifact@v2
+        with:
+          name: ascii-art
+          path : ascii_art.txt
 
       - name: Sleep for 30 seconds
         run: sleep 30
@@ -22,17 +27,17 @@ jobs:
     needs: build-job-1
     runs-on: ubuntu-latest
     steps:
-      - name: Sleep for 10 seconds
-        run: sleep 10
+    - name: Sleep for 10 seconds
+      run: sleep 10
 
-      - name: Test if Ascii Art File is created
-        run: |
-          if [ -f ascii_art.txt ]; then
-            echo "File exists!"
-          else
-            echo "File not found!"
-            exit 1
-          fi
+    - name: Download ascii art file
+      uses: actions/download-artifact@v5
+      with:
+        name: ascii-art
+        path: ascii_art.txt
+
+   
+
 
   deploy-job-3:
     needs: test-job-2
@@ -40,6 +45,11 @@ jobs:
     steps:
       - name: Sleep for 10 seconds
         run: sleep 10
+      - name: Download ascii art file
+        uses: actions/download-artifact@v5
+        with:
+          name: ascii-art
+          path: ascii_art.txt
 
       - name: Display Ascii Art File
         run: |
