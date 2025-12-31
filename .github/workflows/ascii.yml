@@ -18,7 +18,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ascii-art
-          path : ascii_art.txt
+          path: ascii_art.txt
 
       - name: Sleep for 5 seconds
         run: sleep 5
