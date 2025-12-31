@@ -34,7 +34,7 @@ jobs:
       uses: actions/download-artifact@v5
       with:
         name: ascii-art
-        path: ascii_art.txt
+        
 
    
 
