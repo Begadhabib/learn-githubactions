@@ -4,35 +4,27 @@ on:
   workflow_dispatch: 
   
   push:
-
-env:
-  CONTAINER_REGISTRY: docker.io
-  IMAGE_NAME: github-actions-nginx
-  DOCKER_USERNAME: ${{ vars.DOCKER_USERNAME }}
-
-
+    branches:
+      - main
 jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-    - name: Docker Build
-      run: echo docker build -t ${{ env.CONTAINER_REGISTRY }}/${{ vars.DOCKER_USERNAME }}/$IMAGE_NAME:latest
-
-    - name: Docker Login
-      run: echo docker login --username=${{ vars.DOCKER_USERNAME }} --password=${{ secrets.DOCKER_PASSWORD }}
-
-    - name: Docker Publish
-      run: echo docker push $CONTAINER_REGISTRY/${{ vars.DOCKER_USERNAME }}/$IMAGE_NAME:latest
+      - name: docker build
+        run: docker buils -t docker.io/dockerusername/dockerimagename:latest .
+      
+      - name: docker login
+        run: docker login --username=begad --password=fakepassword1234
+      
+      - name: docker publish
+        run: docker push docker.io/dockerusername/dockerimagename:latest
+  
 
   deploy:
-    if: github.ref == 'refs/heads/main'
-    needs: docker
-    concurrency: 
-      group: production-deployment
-      cancel-in-progress: false
     runs-on: ubuntu-latest
+    needs: docker
     steps:
-    - name: Docker Run
-      timeout-minutes: 10
-      run: |
-        docker run -d -p 8080:80 $CONTAINER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
+      - name: deploy step
+        run: echo "deploying the application..."
+      -name: docker run:
+       run: docker run -d -p 80:80 docker.io/dockerusername/dockerimagename:latest

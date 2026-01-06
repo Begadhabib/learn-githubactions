@@ -1,6 +1,8 @@
+---
 name: Ascii
 
-on: push
+on:
+  push: {}
 
 jobs:
   build-job-1:
@@ -27,8 +29,8 @@ jobs:
     needs: build-job-1
     runs-on: ubuntu-latest
     steps:
-    - name: Sleep for 5 seconds
-      run: sleep 5
+      - name: Sleep for 5 seconds
+        run: sleep 5
 
     - name: Download ascii art file
       uses: actions/download-artifact@v5

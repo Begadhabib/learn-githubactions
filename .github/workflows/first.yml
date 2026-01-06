@@ -1,4 +1,5 @@
-name : My First Workflow
+---
+name: My First Workflow
 on: [push]
 jobs:
   build:
@@ -17,6 +18,6 @@ jobs:
       - name: Show Date and Time
         run: date
       - name: Install cowsay
-        run: | 
+        run: |
           chmod +x asci.sh
           ./asci.sh
