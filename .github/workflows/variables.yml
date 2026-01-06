@@ -44,18 +44,18 @@ jobs:
           CONTAINER_REGISTRY: docker.io
           IMAGE_NAME: github-actions-nginx
           DOCKER_USERNAME: begad
-        run: docker build -t $CONTAINER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
+        run: echo docker build -t $CONTAINER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
       - name: docker login
         env:
           DOCKER_USERNAME: begad
           DOCKER_PASSWORD: FakePassword1234
-        run: docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
+        run: echo docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
       - name: docker publish
         env:
           CONTAINER_REGISTRY: docker.io
           IMAGE_NAME: github-actions-nginx
           DOCKER_USERNAME: begad
-        run: docker push $CONTAINER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
+        run: echo docker push $CONTAINER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
 
 
   deploy:
@@ -67,6 +67,6 @@ jobs:
           CONTAINER_REGISTRY: docker.io
           IMAGE_NAME: github-actions-nginx
           DOCKER_USERNAME: begad
-        run: docker run -d -p 80:80 $CONTAINER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
+        run: echo docker run -d -p 80:80 $CONTAINER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
       - name: deploy step
         run: echo "deploying the application..."
