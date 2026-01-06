@@ -1,30 +1,72 @@
-name: Exploring Variables and Secrets
+# name: Exploring Variables and Secrets
 
-on:
-  workflow_dispatch: 
+# on:
+#   workflow_dispatch: 
   
+#   push:
+#     branches:
+#       - main
+# jobs:
+#   docker:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: docker build
+#         run: docker buils -t docker.io/dockerusername/dockerimagename:latest .
+      
+#       - name: docker login
+#         run: docker login --username=begad --password=fakepassword1234
+      
+#       - name: docker publish
+#         run: docker push docker.io/dockerusername/dockerimagename:latest
+  
+
+#   deploy:
+#     runs-on: ubuntu-latest
+#     needs: docker
+#     steps:
+#       - name: deploy step
+#         run: echo "deploying the application..."
+#       - name: docker run
+#         run: docker run -d -p 80:80 docker.io/dockerusername/dockerimagename:latest
+
+
+name: Exploring Variables and Secrets
+on:
   push:
-    branches:
-      - main
+
+
 jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
       - name: docker build
-        run: docker buils -t docker.io/dockerusername/dockerimagename:latest .
-      
+        env:
+          CONTAINER_REGISTRY: docker.io
+          IMAGE_NAME: github-actions-nginx
+          DOCKER_USERNAME: begad
+        run: docker build -t $CONTAINER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest .
       - name: docker login
-        run: docker login --username=begad --password=fakepassword1234
-      
+        env:
+          DOCKER_USERNAME: begad
+          DOCKER_PASSWORD: FakePassword1234
+        run: docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
       - name: docker publish
-        run: docker push docker.io/dockerusername/dockerimagename:latest
-  
+        env:
+          CONTAINER_REGISTRY: docker.io
+          IMAGE_NAME: github-actions-nginx
+          DOCKER_USERNAME: begad
+        run: docker push $CONTAINER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
+
 
   deploy:
     runs-on: ubuntu-latest
     needs: docker
     steps:
+      - name: docker run
+        env:
+          CONTAINER_REGISTRY: docker.io
+          IMAGE_NAME: github-actions-nginx
+          DOCKER_USERNAME: begad
+        run: docker run -d -p 80:80 $CONTAINER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
       - name: deploy step
         run: echo "deploying the application..."
-      - name: docker run
-        run: docker run -d -p 80:80 docker.io/dockerusername/dockerimagename:latest
