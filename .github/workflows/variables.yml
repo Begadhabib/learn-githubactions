@@ -35,5 +35,4 @@ jobs:
     - name: Docker Run
       timeout-minutes: 10
       run: |
-        docker run -d -p 8080:80 $CONTAINER_REGISTRY/${{ vars.DOCKER_USERNAME }}/$IMAGE_NAME:latest
-
+        docker run -d -p 8080:80 $CONTAINER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
