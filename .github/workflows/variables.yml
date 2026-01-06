@@ -44,7 +44,7 @@ jobs:
           CONTAINER_REGISTRY: docker.io
           IMAGE_NAME: github-actions-nginx
           DOCKER_USERNAME: begad
-        run: docker build -t $CONTAINER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest .
+        run: docker build -t $CONTAINER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
       - name: docker login
         env:
           DOCKER_USERNAME: begad
