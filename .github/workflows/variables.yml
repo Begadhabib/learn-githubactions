@@ -6,8 +6,10 @@ on:
   push:
 
 env:
-    CONTAINER_REGISTRY: docker.io
-    IMAGE_NAME: github-actions-nginx    
+  CONTAINER_REGISTRY: docker.io
+  IMAGE_NAME: github-actions-nginx
+  DOCKER_USERNAME: ${{ vars.DOCKER_USERNAME }}
+
 
 jobs:
   docker:
