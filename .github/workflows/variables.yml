@@ -33,6 +33,12 @@
 name: Exploring Variables and Secrets
 on:
   push:
+env:
+
+  CONTAINER_REGISTRY: docker.io
+  IMAGE_NAME: github-actions-nginx
+
+
 
 
 jobs:
@@ -40,21 +46,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: docker build
-        env:
-          CONTAINER_REGISTRY: docker.io
-          IMAGE_NAME: github-actions-nginx
-          DOCKER_USERNAME: begad
+        
         run: echo docker build -t $CONTAINER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
       - name: docker login
-        env:
-          DOCKER_USERNAME: begad
-          DOCKER_PASSWORD: FakePassword1234
-        run: echo docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
+        run: echo docker login --username= ${{ vars.DOCKER_USERNAME }} --password= ${{secrets.DOCKER_PASSWORD }}
       - name: docker publish
-        env:
-          CONTAINER_REGISTRY: docker.io
-          IMAGE_NAME: github-actions-nginx
-          DOCKER_USERNAME: begad
+        
         run: echo docker push $CONTAINER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
 
 
@@ -63,10 +60,7 @@ jobs:
     needs: docker
     steps:
       - name: docker run
-        env:
-          CONTAINER_REGISTRY: docker.io
-          IMAGE_NAME: github-actions-nginx
-          DOCKER_USERNAME: begad
+        
         run: echo docker run -d -p 80:80 $CONTAINER_REGISTRY/$DOCKER_USERNAME/$IMAGE_NAME:latest
       - name: deploy step
         run: echo "deploying the application..."
