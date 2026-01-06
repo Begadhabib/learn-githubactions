@@ -29,7 +29,7 @@
 #       - name: docker run
 #         run: docker run -d -p 80:80 docker.io/dockerusername/dockerimagename:latest
 
-
+# Revised Code Below
 name: Exploring Variables and Secrets
 on:
   push:
