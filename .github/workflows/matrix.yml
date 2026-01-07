@@ -15,7 +15,7 @@ jobs:
       - name: Deploy on Ubuntu
         run: echo "Deploying on Ubuntu"
       - name: Show OS Info
-        run: docker --version
+        run: docker info
       - name: docker run 
         run: docker run ${{ matrix.images }}
 
