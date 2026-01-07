@@ -12,8 +12,8 @@ jobs:
     runs-on: ${{ matrix.os }}
         
     steps:
-      - name: Deploy on Ubuntu
-        run: echo "Deploying on Ubuntu"
+      - name: Deploy on ${{ matrix.os }}
+        run: echo "Deploying on ${{ matrix.os }}"
       - name: Show OS Info
         run: docker info
       - name: docker run 
