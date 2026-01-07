@@ -34,7 +34,7 @@ name: Exploring Variables and Secrets
 on:
   workflow_dispatch:
     
-  #push:
+  push:
 env:
 
   CONTAINER_REGISTRY: docker.io
@@ -58,6 +58,7 @@ jobs:
 
 
   deploy:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     needs: docker
     concurrency:
@@ -68,7 +69,7 @@ jobs:
         
         run: |
           echo docker run -d -p 80:80 $CONTAINER_REGISTRY/${{ vars.DOCKER_USERNAME }}/$IMAGE_NAME:latest
-          sleep 500s
+          sleep 400s
       - name: deploy step
         run: echo "deploying the application..."
         
